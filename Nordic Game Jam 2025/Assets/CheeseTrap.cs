@@ -6,6 +6,8 @@ public class CheeseTrap : MonoBehaviour
     private Rigidbody playerRB;
     [SerializeField] private float cheeseLureStrength = 1f;
     [SerializeField] private float maxPull = 1000f;
+    
+    [SerializeField] AudioSource audioSource;
 
     private void Start()
     {
@@ -23,6 +25,9 @@ public class CheeseTrap : MonoBehaviour
             
             Vector3 directionalForce = direction.normalized * Mathf.Clamp(1/distance * cheeseLureStrength,-maxPull,maxPull);
             playerRB.AddForce(directionalForce);
+            
+            //Scale audio volume based on distance
+            audioSource.volume = Mathf.Clamp((1/distance)*2,0,1);
         }
     }
 }

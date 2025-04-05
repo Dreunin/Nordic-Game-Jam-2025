@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private ClimbDirection _climbDirection;
     private Climbable _inFrontOfClimbable;
     private float climbableBottom, climbableTop;
+    [SerializeField] private AudioClip[] playerSounds; //Jump, 
 
     private void Awake()
     {
