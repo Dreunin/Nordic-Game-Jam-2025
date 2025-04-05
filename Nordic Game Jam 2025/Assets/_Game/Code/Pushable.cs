@@ -7,10 +7,12 @@ public class Pushable : MonoBehaviour
 {
     [SerializeField] private bool generatesSound = false;
     [SerializeField] private float maxNoisePerCollision = 1f;
+    Rigidbody rb;
     
     private void Awake()
     {
-        throw new NotImplementedException();
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     private void OnCollisionEnter(Collision other)
