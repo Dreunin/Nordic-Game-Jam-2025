@@ -26,7 +26,5 @@ public class CameraTransition : MonoBehaviour
             _cameraLeft.SetActive(false);
             _cameraRight.SetActive(true);
         }
-        
-        GameManager.instance.SetCheckpoint(transform.position);
     }
 }

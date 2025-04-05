@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -69,4 +70,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void SetCheckpoint(Vector3 position) => currentCheckpoint = position;
+
+    public void LoseGame()
+    {
+        //Play losing animation
+        
+        //Wait for animation to finish
+        //Reload level
+        ResetToCheckPoint();
+    }
 }

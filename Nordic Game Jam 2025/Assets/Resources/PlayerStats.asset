@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9254496a19abd8b4cad92d96e4c14273, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  RunThreshold: 0.1
+  RunThreshold: 0.6
   MaxSpeed: 8
-  Acceleration: 75
-  JumpPower: 1000
+  Acceleration: 1000
+  JumpPower: 1500
   JumpCooldown: 0.25
   inAirMovementModifier: 0.2
+  ClimbSpeed: 7
+  ClimbJumpPower: 1200

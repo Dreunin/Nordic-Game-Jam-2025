@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private ClimbDirection _climbDirection;
     private Climbable _inFrontOfClimbable;
     private float climbableBottom, climbableTop;
+    [SerializeField] private AudioClip[] playerSounds; //Jump, 
 
     private void Awake()
     {
@@ -65,7 +67,7 @@ public class PlayerController : MonoBehaviour
         currentInput = GatherInput();
     }
 
-    private Vector2 GatherInput()
+    public Vector2 GatherInput()
     {
         Vector2 input = _move.ReadValue<Vector2>();
         return input;
@@ -97,6 +99,22 @@ public class PlayerController : MonoBehaviour
         else
         {
             ClimbingMovement();
+        }
+
+        HandleSpriteRotation();
+    }
+
+    private void HandleSpriteRotation()
+    {
+        //If x velocity is greater than 0, rotate sprite to the left
+        if (_rb.linearVelocity.x < 0)
+        {
+            //Dotween flip the sprite
+            transform.DOScaleX(1,Mathf.Abs(transform.localScale.x));
+        }
+        else if (_rb.linearVelocity.x > 0)
+        {
+            transform.DOScaleX(-1,Mathf.Abs(transform.localScale.x));
         }
     }
 
@@ -163,20 +181,26 @@ public class PlayerController : MonoBehaviour
 
     private void HorizontalMovement()
     {
-        _rb.AddForce(new Vector3(_stats.Acceleration * currentInput.x * (!_grounded ? _stats.inAirMovementModifier : 1)
-            ,0,0));
-        //Clamp to max speed
-        _rb.linearVelocity = new Vector3(
-            Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed, _stats.MaxSpeed),_rb.linearVelocity.y,0);
-        
-        /*if (currentInput.x < _stats.RunThreshold)
+        float forceToAdd = _stats.Acceleration * currentInput.x * (!_grounded ? _stats.inAirMovementModifier : 1);
+        if (Mathf.Abs(currentInput.x) < _stats.RunThreshold)
         {
             //Sneak
+            forceToAdd /= 2;
+            _rb.AddForce(new Vector3(forceToAdd,
+                0,0));
+            //Clamp to max speed/2 (half speed when sneaking)
+            _rb.linearVelocity = new Vector3(
+                Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed/2, _stats.MaxSpeed/2),_rb.linearVelocity.y,0);
         }
         else
         {
             //Run
-        }*/
+            _rb.AddForce(new Vector3(forceToAdd,
+                0,0));
+            //Clamp to max speed
+            _rb.linearVelocity = new Vector3(
+                Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed, _stats.MaxSpeed),_rb.linearVelocity.y,0);
+        }
     }
 
     private void ClimbingMovement()
