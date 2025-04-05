@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            float jumpAngle = Mathf.PI / 3f * (_climbDirection == ClimbDirection.Right ? -1 : 1);
+            float jumpAngle = Mathf.PI / 3f * (_climbDirection == ClimbDirection.Right ? 1 : -1);
             _rb.AddForce(new Vector2(Mathf.Sin(jumpAngle), Mathf.Cos(jumpAngle)) * _stats.JumpPower);
         }
     }
