@@ -6,6 +6,11 @@ public class CameraTransition : MonoBehaviour
     [SerializeField] private GameObject _cameraLeft;
     [SerializeField] private GameObject _cameraRight;
 
+    private void Awake()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
