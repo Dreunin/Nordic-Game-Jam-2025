@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private InputAction _move;
     private InputAction _jump;
 
+    private float groundedRaycastLength = 0.1f;
+
     public event Action Landed;
     public event Action Jumped;
     public event Action FelloffLedge;
@@ -57,6 +59,17 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump(InputAction.CallbackContext ctx)
     {
+        //Raycast  down to check if grounded
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, _col.bounds.extents.y + groundedRaycastLength))
+        {
+            _grounded = true;
+        }
+        else
+        {
+            _grounded = false;
+        }
+        
         if (!_grounded || _jumpTimestamp + _stats.JumpCooldown > Time.time) return;
         
         Jump();
