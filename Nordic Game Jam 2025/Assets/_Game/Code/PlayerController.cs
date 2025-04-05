@@ -27,6 +27,13 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<CapsuleCollider>();
         _input = GetComponent<PlayerInput>();
+        
+        DontDestroyOnLoad(gameObject);
+    }
+    
+    public void ResetVelocity()
+    {
+        _rb.linearVelocity = Vector3.zero;
     }
 
     private void Start()
@@ -52,13 +59,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HorizontalMovement();
-    }
-
-    private bool _grounded;
-
-    private void HandleJump(InputAction.CallbackContext ctx)
-    {
         //Raycast  down to check if grounded
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, _col.bounds.extents.y + groundedRaycastLength))
@@ -70,6 +70,13 @@ public class PlayerController : MonoBehaviour
             _grounded = false;
         }
         
+        HorizontalMovement();
+    }
+
+    private bool _grounded;
+
+    private void HandleJump(InputAction.CallbackContext ctx)
+    {
         if (!_grounded || _jumpTimestamp + _stats.JumpCooldown > Time.time) return;
         
         Jump();
@@ -95,7 +102,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _rb.AddForce(new Vector3(_stats.Acceleration * currentInput.x,0,0));
+            _rb.AddForce(new Vector3(_stats.Acceleration * currentInput.x * (!_grounded ? _stats.inAirMovementModifier : 1)
+                ,0,0));
             //Clamp to max speed
             _rb.linearVelocity = new Vector3(
                 Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed, _stats.MaxSpeed),_rb.linearVelocity.y,0);

@@ -20,4 +20,7 @@ using UnityEngine;
 
         [Tooltip("Delay between jumps in seconds")]
         public float JumpCooldown = 0.25f;
+        
+        [Tooltip("How much can you actually move while in the air")]
+        public float inAirMovementModifier = 0.2f;
 }
