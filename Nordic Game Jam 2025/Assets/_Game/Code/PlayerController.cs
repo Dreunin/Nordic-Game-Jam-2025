@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -107,11 +108,12 @@ public class PlayerController : MonoBehaviour
         //If x velocity is greater than 0, rotate sprite to the left
         if (_rb.linearVelocity.x < 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            //Dotween flip the sprite
+            transform.DOScaleX(1,Mathf.Abs(transform.localScale.x));
         }
         else if (_rb.linearVelocity.x > 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.DOScaleX(-1,Mathf.Abs(transform.localScale.x));
         }
     }
 
