@@ -6,6 +6,6 @@ public class PlayerCamera : MonoBehaviour
 {
     private void Start()
     {
-        GetComponent<CinemachineCamera>().Follow = GameObject.FindGameObjectWithTag("Player").transform;
+        GetComponent<CinemachineCamera>().Follow = GameObject.Find("CameraOffset").transform;
     }
 }
