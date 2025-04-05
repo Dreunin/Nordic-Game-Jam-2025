@@ -98,6 +98,21 @@ public class PlayerController : MonoBehaviour
         {
             ClimbingMovement();
         }
+
+        HandleSpriteRotation();
+    }
+
+    private void HandleSpriteRotation()
+    {
+        //If x velocity is greater than 0, rotate sprite to the left
+        if (_rb.linearVelocity.x < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (_rb.linearVelocity.x > 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     private void LateUpdate()
