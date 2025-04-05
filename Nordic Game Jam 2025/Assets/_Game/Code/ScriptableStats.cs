@@ -23,4 +23,13 @@ using UnityEngine;
         
         [Tooltip("How much can you actually move while in the air")]
         public float inAirMovementModifier = 0.2f;
-}
+
+        [Header("CLIMBING")]
+        [Tooltip("The speed at which the player climbs at")]
+        public float ClimbSpeed = 7;
+
+        [Tooltip("The power applied when jumping off a climbable object")]
+        public float ClimbJumpPower = 1200;
+        
+        
+    }
