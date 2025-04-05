@@ -604,6 +604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442248133}
   - component: {fileID: 442248134}
+  - component: {fileID: 442248135}
   m_Layer: 0
   m_Name: Attach Collider
   m_TagString: Climbable
@@ -647,6 +648,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &442248135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442248132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848ccbe401fc67442b8a238cea96d4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 0.5
 --- !u!114 &467264859 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5583980379353246697, guid: 83d4bf10697a26d4d82e1b92e9ae094a, type: 3}
