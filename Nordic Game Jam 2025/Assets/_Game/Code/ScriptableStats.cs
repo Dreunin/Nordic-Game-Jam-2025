@@ -18,12 +18,9 @@ using UnityEngine;
         [Tooltip("Power applied when jumping")]
         public float JumpPower = 36;
 
-        [Tooltip("Terminal falling speed")]
-        public float MaxFallSpeed = 40;
-
-        [Tooltip("Gravity acceleration when falling")]
-        public float FallAcceleration = 110;
-        
         [Tooltip("Delay between jumps in seconds")]
         public float JumpCooldown = 0.25f;
+        
+        [Tooltip("How much can you actually move while in the air")]
+        public float inAirMovementModifier = 0.2f;
 }
