@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        if(GameObject.FindGameObjectWithTag("Player") != this.gameObject)
+        {
+            Destroy(gameObject);
+            return;
+        }
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<CapsuleCollider>();
         _input = GetComponent<PlayerInput>();
