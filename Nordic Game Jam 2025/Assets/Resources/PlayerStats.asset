@@ -18,3 +18,5 @@ MonoBehaviour:
   JumpPower: 1500
   JumpCooldown: 0.25
   inAirMovementModifier: 0.2
+  ClimbSpeed: 7
+  ClimbJumpPower: 1200
