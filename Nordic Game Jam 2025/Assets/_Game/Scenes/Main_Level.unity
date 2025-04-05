@@ -686,17 +686,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1808592687294780751, guid: 0bd6d3268731eee41ad9037a2377e7a2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3691767201366076703, guid: 0bd6d3268731eee41ad9037a2377e7a2, type: 3}
       propertyPath: m_Name
       value: Mouse
       objectReference: {fileID: 0}
+    - target: {fileID: 5247835393065629523, guid: 0bd6d3268731eee41ad9037a2377e7a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5458435460295551410, guid: 0bd6d3268731eee41ad9037a2377e7a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -105.8
+      value: 3.9
       objectReference: {fileID: 0}
     - target: {fileID: 5458435460295551410, guid: 0bd6d3268731eee41ad9037a2377e7a2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 35.4
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 5458435460295551410, guid: 0bd6d3268731eee41ad9037a2377e7a2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -743,6 +751,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 66290507794406497, guid: fd50b4f9f1c93df43b56454c636e3c43, type: 3}
+      propertyPath: m_Color.b
+      value: 0.53333336
+      objectReference: {fileID: 0}
+    - target: {fileID: 66290507794406497, guid: fd50b4f9f1c93df43b56454c636e3c43, type: 3}
+      propertyPath: m_Color.g
+      value: 0.53333336
+      objectReference: {fileID: 0}
+    - target: {fileID: 66290507794406497, guid: fd50b4f9f1c93df43b56454c636e3c43, type: 3}
+      propertyPath: m_Color.r
+      value: 0.53333336
+      objectReference: {fileID: 0}
     - target: {fileID: 1083401970917345993, guid: fd50b4f9f1c93df43b56454c636e3c43, type: 3}
       propertyPath: m_Name
       value: Level
