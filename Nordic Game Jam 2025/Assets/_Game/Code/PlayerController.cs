@@ -118,15 +118,5 @@ public class PlayerController : MonoBehaviour
             }*/
         }
     }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        _grounded = true;
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        _grounded = false;
-    }
 }
 
