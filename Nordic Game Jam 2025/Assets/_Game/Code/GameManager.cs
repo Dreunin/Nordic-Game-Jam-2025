@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ResetToCheckPoint()
+    public void ResetToCheckPoint()
     {
         ReloadLevel();
         player.ResetVelocity();
@@ -78,5 +78,10 @@ public class GameManager : MonoBehaviour
         //Wait for animation to finish
         //Reload level
         ResetToCheckPoint();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }
