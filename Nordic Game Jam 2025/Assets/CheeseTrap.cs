@@ -23,7 +23,6 @@ public class CheeseTrap : MonoBehaviour
             
             Vector3 directionalForce = direction.normalized * Mathf.Clamp(1/distance * cheeseLureStrength,-maxPull,maxPull);
             playerRB.AddForce(directionalForce);
-            Debug.Log(directionalForce);
         }
     }
 }
