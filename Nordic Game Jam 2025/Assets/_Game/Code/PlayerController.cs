@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class PlayerController : MonoBehaviour
@@ -7,52 +8,59 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerStats _stats;
     private Rigidbody _rb;
     private CapsuleCollider _col;
+    private PlayerInput _input;
+    
+    private InputActionMap _inputMap;
+    private InputAction _move;
+    private InputAction _jump;
 
     public event Action Landed;
     public event Action Jumped;
     public event Action FelloffLedge;
 
-    private float _jumpCooldown;
+    private float _jumpTimestamp;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<CapsuleCollider>();
+        _input = GetComponent<PlayerInput>();
+    }
+
+    private void Start()
+    {
+        _inputMap = _input.actions.FindActionMap("Infiltration");
+        _move = _inputMap.FindAction("Move");
+        _jump = _inputMap.FindAction("Jump");
+        _jump.performed += HandleJump;
     }
 
     private Vector2 currentInput;
     
     private void Update()
     {
-        _jumpCooldown += Time.deltaTime;
         currentInput = GatherInput();
     }
 
     private Vector2 GatherInput()
     {
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); //Update to new input
+        Vector2 input = _move.ReadValue<Vector2>();
         return input;
     }
 
     private void FixedUpdate()
     {
-        HandleJump();
         HorizontalMovement();
     }
 
     private bool _grounded;
 
-    private void HandleJump()
+    private void HandleJump(InputAction.CallbackContext ctx)
     {
-        if (_grounded && _jumpCooldown > _stats.JumpCooldown)
-        {
-            //If pressing jump
-            if (Input.GetButtonDown("Jump"))
-            {
-                Jump();
-                _jumpCooldown = 0;
-            }
-        }
+        if (!_grounded || _jumpTimestamp + _stats.JumpCooldown > Time.time) return;
+        
+        Jump();
+        _jumpTimestamp = Time.time;
     }
 
     private void Jump()
