@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   RunThreshold: 0.1
-  MaxSpeed: 14
-  Acceleration: 120
-  JumpPower: 300
+  MaxSpeed: 8
+  Acceleration: 50
+  JumpPower: 800
   MaxFallSpeed: 40
   FallAcceleration: 110
   JumpCooldown: 0.25
