@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RunThreshold: 0.1
   MaxSpeed: 8
-  Acceleration: 75
-  JumpPower: 1000
+  Acceleration: 1000
+  JumpPower: 1500
   JumpCooldown: 0.25
   inAirMovementModifier: 0.2
