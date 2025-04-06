@@ -104,8 +104,11 @@ public class ExtractionManager : MonoBehaviour
         if (_teeth.All(t => t.IsCollected())) Win();
     }
 
+    public GameObject canvas;
+    
     private void Win()
     {
+        canvas.SetActive(true);
         Debug.Log("Win");
     }
 
