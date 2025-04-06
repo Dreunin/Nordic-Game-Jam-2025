@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     TextMeshProUGUI noiseText;
     private Vector3 currentCheckpoint;
 
+    public GameObject gameOverCanvas;
+
     private PlayerController player;
     
     private void Awake()
@@ -23,12 +25,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         noiseText = GameObject.Find("NoiseMade").GetComponent<TextMeshProUGUI>();
+        
+        //Set default checkpoint to player position
+        currentCheckpoint = player.transform.position;
     }
 
     void Update()
@@ -53,7 +59,7 @@ public class GameManager : MonoBehaviour
     public void UpdateNoise(float noise)
     {
         noiseMade += noise;
-        noiseText.text = "Noise: " + noiseMade.ToString("0.00");
+        noiseText.text = "Sleeping: " + noiseMade.ToString("0") + "%";
         
         //Press R to restart
         if (Input.GetKeyDown(KeyCode.R))
@@ -73,15 +79,20 @@ public class GameManager : MonoBehaviour
 
     public void LoseGame()
     {
-        //Play losing animation
-        
-        //Wait for animation to finish
-        //Reload level
-        ResetToCheckPoint();
+        //Show game over screen
+        gameOverCanvas.SetActive(true);
     }
 
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void StartExtraction()
+    {
+        //Destroy player
+        Destroy(player.gameObject);
+        //Next scene
+        SceneManager.LoadScene("ExtractionScene");
     }
 }
