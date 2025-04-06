@@ -368,6 +368,7 @@ MonoBehaviour:
   - {fileID: 1736555646}
   _playerAnimator: {fileID: 289818213}
   crosshairSpeed: 10
+  canvas: {fileID: 2052641403}
 --- !u!1 &289818212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,7 +1359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2052641404
 MonoBehaviour:
   m_ObjectHideFlags: 0
