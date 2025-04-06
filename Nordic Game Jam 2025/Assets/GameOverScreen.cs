@@ -9,6 +9,7 @@ public class GameOverScreen : MonoBehaviour
 
     public void ResetToCheckPoint()
     {
+        gameObject.SetActive(false);
         GameManager.instance.ResetToCheckPoint();
     }
 }
