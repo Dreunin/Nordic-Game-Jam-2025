@@ -3,6 +3,7 @@ using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = System.Random;
 
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class PlayerController : MonoBehaviour
@@ -198,6 +199,8 @@ public class PlayerController : MonoBehaviour
         
         //Apply force
         _rb.AddForce(new Vector3(0,jumpVelocity,0));
+        
+        GetComponent<AudioSource>().PlayOneShot(playerSounds[UnityEngine.Random.Range(0,playerSounds.Length)]);
         
         Jumped?.Invoke();
     }

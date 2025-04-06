@@ -163,7 +163,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 03d7ccda52ced6049a64bb23de1ba640, type: 2}
-  playerSounds: []
+  flipTime: 1
+  playerSounds:
+  - {fileID: 8300000, guid: 0f3936374efa7c643b5266b21335307a, type: 3}
+  - {fileID: 8300000, guid: ec5397b9327e3d14d9c00fef34f3a269, type: 3}
+  - {fileID: 8300000, guid: fbec5c5e5b7666e43904d45eb860d0c8, type: 3}
   upDownThreshold: 2
 --- !u!136 &7327857084297162828
 CapsuleCollider:
