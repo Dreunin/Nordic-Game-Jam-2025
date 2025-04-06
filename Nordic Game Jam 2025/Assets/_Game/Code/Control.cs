@@ -5,6 +5,6 @@ public class Control : MonoBehaviour
 {
     public void NextScene()
     {
-        SceneManager.LoadScene("Main-Level");
+        SceneManager.LoadScene("Main_Level");
     }
 }
