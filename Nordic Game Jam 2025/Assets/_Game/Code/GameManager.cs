@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Main_Level");
         Time.timeScale = 1;
     }
 
