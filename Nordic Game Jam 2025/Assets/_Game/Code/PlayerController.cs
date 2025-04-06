@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
     
     private float _jumpTimestamp;
 
+    private bool _disableMaxSpeed = false;
+    private float _disableMaxSpeedTime = 0f;
+
+    
     enum ClimbDirection { Left, Right }
     private Climbable _attachedClimbable;
     private ClimbDirection _climbDirection;
@@ -104,7 +108,12 @@ public class PlayerController : MonoBehaviour
                         _col.bounds.extents.y + groundedRaycastLength) ||
                     Physics.Raycast(new Vector3(_col.bounds.max.x, transform.position.y), Vector3.down, out hit,
                         _col.bounds.extents.y + groundedRaycastLength);
-                    ;
+
+        if (_grounded && _disableMaxSpeedTime < Time.time - 0.5)
+        {
+            _disableMaxSpeed = false;
+        }
+
 
         if (_rb.linearVelocity.y < -0.1 && _inFrontOfClimbable is not null)
         {
@@ -233,8 +242,11 @@ public class PlayerController : MonoBehaviour
             _rb.AddForce(new Vector3(forceToAdd,
                 0,0));
             //Clamp to max speed/2 (half speed when sneaking)
-            _rb.linearVelocity = new Vector3(
-                Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed/2, _stats.MaxSpeed/2),_rb.linearVelocity.y,0);
+            if (!_disableMaxSpeed)
+            {
+                _rb.linearVelocity = new Vector3(
+                    Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed/2, _stats.MaxSpeed/2),_rb.linearVelocity.y,0);
+            }
             animator.SetBool(Sneak, true);
             animator.SetBool(Walk,false);
         }
@@ -244,8 +256,11 @@ public class PlayerController : MonoBehaviour
             _rb.AddForce(new Vector3(forceToAdd,
                 0,0));
             //Clamp to max speed
-            _rb.linearVelocity = new Vector3(
-                Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed, _stats.MaxSpeed),_rb.linearVelocity.y,0);
+            if (!_disableMaxSpeed)
+            {
+                _rb.linearVelocity = new Vector3(
+                    Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed, _stats.MaxSpeed),_rb.linearVelocity.y,0);
+            }
             animator.SetBool(Sneak, false);
             animator.SetBool(Walk,true);
         }
@@ -293,6 +308,17 @@ public class PlayerController : MonoBehaviour
             {
                 _inFrontOfClimbable = other.GetComponent<Climbable>();
             }
+        }
+
+        if (other.CompareTag("Jumppad"))
+        {
+            Jumppad jumppad = other.transform.parent.GetComponent<Jumppad>();
+            if (jumppad.used) return;
+            float angle = jumppad.angle * Mathf.Deg2Rad;
+            _rb.AddForce(new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0) * jumppad.strength);
+            _disableMaxSpeed = true;
+            _disableMaxSpeedTime = Time.time;
+            jumppad.Use();
         }
     }
 
