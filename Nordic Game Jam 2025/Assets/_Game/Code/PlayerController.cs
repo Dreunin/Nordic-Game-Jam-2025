@@ -1,11 +1,18 @@
 using System;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class PlayerController : MonoBehaviour
 {
+    private static readonly int Hang = Animator.StringToHash("Hang");
+    private static readonly int Up = Animator.StringToHash("Up");
+    private static readonly int Down = Animator.StringToHash("Down");
+    private static readonly int Sneak = Animator.StringToHash("Sneak");
+    private static readonly int Walk = Animator.StringToHash("Walk");
+    private static readonly int Grounded = Animator.StringToHash("Grounded");
     [SerializeField] private PlayerStats _stats;
     private Rigidbody _rb;
     private CapsuleCollider _col;
@@ -23,9 +30,10 @@ public class PlayerController : MonoBehaviour
     public event Action ClimbStarted;
     public event Action ClimbEnded;
 
+    private Animator animator;
+    
     private float _jumpTimestamp;
 
-    
     enum ClimbDirection { Left, Right }
     private Climbable _attachedClimbable;
     private ClimbDirection _climbDirection;
@@ -45,6 +53,7 @@ public class PlayerController : MonoBehaviour
         _input = GetComponent<PlayerInput>();
         
         DontDestroyOnLoad(gameObject);
+        animator = GetComponentInChildren<Animator>();
     }
     
     public void ResetVelocity()
@@ -58,6 +67,12 @@ public class PlayerController : MonoBehaviour
         _move = _inputMap.FindAction("Move");
         _jump = _inputMap.FindAction("Jump");
         _jump.performed += HandleJump;
+        
+        //Dotween enlarge and visible player
+        transform.localScale = Vector3.zero;
+        GetComponent<SpriteRenderer>().DOFade(0, 0);
+        GetComponent<SpriteRenderer>().DOFade(1, 2f);
+        transform.DOScale(1, 2f);
     }
 
     private Vector2 currentInput;
@@ -101,10 +116,10 @@ public class PlayerController : MonoBehaviour
             ClimbingMovement();
         }
 
-        HandleSpriteRotation();
+        HandleSprite();
     }
 
-    private void HandleSpriteRotation()
+    private void HandleSprite()
     {
         //If x velocity is greater than 0, rotate sprite to the left
         if (_rb.linearVelocity.x < 0)
@@ -116,6 +131,27 @@ public class PlayerController : MonoBehaviour
         {
             transform.DOScaleX(-1,Mathf.Abs(transform.localScale.x));
         }
+        
+        //If y velocity is greater than 0, play jump animation
+        if (_rb.linearVelocity.y > 0)
+        {
+            animator.SetBool(Up, true);
+            animator.SetBool(Down, false);
+            animator.SetBool(Hang, true);
+        }
+        else if (_rb.linearVelocity.y < 0)
+        {
+            animator.SetBool(Up, false);
+            animator.SetBool(Down, true);
+            animator.SetBool(Hang, true);
+        } else if (_rb.linearVelocity.y == 0 && !_grounded)
+        {
+            animator.SetBool(Up, false);
+            animator.SetBool(Down, false);
+            animator.SetBool(Hang, true);
+        }
+        
+        animator.SetBool(Grounded,_grounded);
     }
 
     private void LateUpdate()
@@ -182,7 +218,7 @@ public class PlayerController : MonoBehaviour
     private void HorizontalMovement()
     {
         float forceToAdd = _stats.Acceleration * currentInput.x * (!_grounded ? _stats.inAirMovementModifier : 1);
-        if (Mathf.Abs(currentInput.x) < _stats.RunThreshold)
+        if (Mathf.Abs(currentInput.x) < _stats.RunThreshold && currentInput.x > 0)
         {
             //Sneak
             forceToAdd /= 2;
@@ -191,8 +227,10 @@ public class PlayerController : MonoBehaviour
             //Clamp to max speed/2 (half speed when sneaking)
             _rb.linearVelocity = new Vector3(
                 Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed/2, _stats.MaxSpeed/2),_rb.linearVelocity.y,0);
+            animator.SetBool(Sneak, true);
+            animator.SetBool(Walk,false);
         }
-        else
+        else if (Mathf.Abs(currentInput.x) >= _stats.RunThreshold)
         {
             //Run
             _rb.AddForce(new Vector3(forceToAdd,
@@ -200,6 +238,13 @@ public class PlayerController : MonoBehaviour
             //Clamp to max speed
             _rb.linearVelocity = new Vector3(
                 Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed, _stats.MaxSpeed),_rb.linearVelocity.y,0);
+            animator.SetBool("Sneak", false);
+            animator.SetBool("Walk",true);
+        }
+        else
+        {
+            animator.SetBool("Sneak", false);
+            animator.SetBool("Walk",false);
         }
     }
 
