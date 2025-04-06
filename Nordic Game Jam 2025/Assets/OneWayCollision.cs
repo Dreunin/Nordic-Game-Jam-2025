@@ -4,15 +4,17 @@ using UnityEngine;
 public class OneWayCollision : MonoBehaviour
 {
     private Transform playerTransform;
+    private CapsuleCollider playerCollider;
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerCollider = playerTransform.GetComponent<CapsuleCollider>();
     }
 
     private void Update()
     {
         //If player is above enable collider
-        if (playerTransform.position.y > transform.position.y)
+        if (playerTransform.position.y > transform.position.y + (playerCollider.height/2)*0.95f)
         {
             GetComponent<Collider>().enabled = true;
         }
