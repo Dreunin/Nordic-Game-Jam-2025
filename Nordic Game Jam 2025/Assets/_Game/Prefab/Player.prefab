@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 03d7ccda52ced6049a64bb23de1ba640, type: 2}
   playerSounds: []
+  upDownThreshold: 2
 --- !u!136 &7327857084297162828
 CapsuleCollider:
   m_ObjectHideFlags: 0

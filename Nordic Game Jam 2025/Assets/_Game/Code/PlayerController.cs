@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private static readonly int Sneak = Animator.StringToHash("Sneak");
     private static readonly int Walk = Animator.StringToHash("Walk");
     private static readonly int Grounded = Animator.StringToHash("Grounded");
+    private static readonly int Climb = Animator.StringToHash("Climb");
     [SerializeField] private PlayerStats _stats;
     private Rigidbody _rb;
     private CapsuleCollider _col;
@@ -119,6 +120,8 @@ public class PlayerController : MonoBehaviour
         HandleSprite();
     }
 
+    [SerializeField] float upDownThreshold = 0.1f;
+    
     private void HandleSprite()
     {
         //If x velocity is greater than 0, rotate sprite to the left
@@ -133,13 +136,13 @@ public class PlayerController : MonoBehaviour
         }
         
         //If y velocity is greater than 0, play jump animation
-        if (_rb.linearVelocity.y > 0)
+        if (_rb.linearVelocity.y > upDownThreshold)
         {
             animator.SetBool(Up, true);
             animator.SetBool(Down, false);
             animator.SetBool(Hang, true);
         }
-        else if (_rb.linearVelocity.y < 0)
+        else if (_rb.linearVelocity.y < -upDownThreshold)
         {
             animator.SetBool(Up, false);
             animator.SetBool(Down, true);
@@ -238,13 +241,13 @@ public class PlayerController : MonoBehaviour
             //Clamp to max speed
             _rb.linearVelocity = new Vector3(
                 Mathf.Clamp(_rb.linearVelocity.x, -_stats.MaxSpeed, _stats.MaxSpeed),_rb.linearVelocity.y,0);
-            animator.SetBool("Sneak", false);
-            animator.SetBool("Walk",true);
+            animator.SetBool(Sneak, false);
+            animator.SetBool(Walk,true);
         }
         else
         {
-            animator.SetBool("Sneak", false);
-            animator.SetBool("Walk",false);
+            animator.SetBool(Sneak, false);
+            animator.SetBool(Walk,false);
         }
     }
 
@@ -268,6 +271,8 @@ public class PlayerController : MonoBehaviour
         _climbDirection = direction;
         float newPosition = _attachedClimbable.transform.position.x + (direction == ClimbDirection.Left ? -1 : 1) * _attachedClimbable.offset;
         transform.position = new Vector3(newPosition, transform.position.y, transform.position.z);
+        //Dotween sprite
+        transform.DOScaleX(direction == ClimbDirection.Left ? -1 : 1, 0.2f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -305,12 +310,14 @@ public class PlayerController : MonoBehaviour
         Collider collider = _attachedClimbable.GetComponent<Collider>(); 
         climbableBottom = collider.bounds.min.y;
         climbableTop = collider.bounds.max.y;
+        animator.SetBool(Climb,true);
     }
 
     private void DetachFromClimbable()
     {
         _attachedClimbable = null;
         _rb.useGravity = true;
+        animator.SetBool(Climb, false);
     }
 }
 
