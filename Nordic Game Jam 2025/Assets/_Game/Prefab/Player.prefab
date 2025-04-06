@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7801026252817326258}
   - component: {fileID: 1808592687294780751}
+  - component: {fileID: 5494990046521266075}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -87,6 +88,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5494990046521266075
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113257759920275850}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f01e4eeb390f9b7468fc54dba69530a7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3691767201366076703
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +163,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 03d7ccda52ced6049a64bb23de1ba640, type: 2}
-  playerSounds: []
+  flipTime: 1
+  playerSounds:
+  - {fileID: 8300000, guid: 0f3936374efa7c643b5266b21335307a, type: 3}
+  - {fileID: 8300000, guid: ec5397b9327e3d14d9c00fef34f3a269, type: 3}
+  - {fileID: 8300000, guid: fbec5c5e5b7666e43904d45eb860d0c8, type: 3}
+  upDownThreshold: 2
 --- !u!136 &7327857084297162828
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -382,7 +410,7 @@ Transform:
   m_GameObject: {fileID: 8034373576484116754}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.677, z: 0}
+  m_LocalPosition: {x: 0, y: 2.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
