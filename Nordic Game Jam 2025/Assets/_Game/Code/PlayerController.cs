@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     public event Action ClimbEnded;
 
     private Animator animator;
+
+    [SerializeField] private float flipTime = 1f;
     
     private float _jumpTimestamp;
 
@@ -128,11 +130,11 @@ public class PlayerController : MonoBehaviour
         if (_rb.linearVelocity.x < 0)
         {
             //Dotween flip the sprite
-            transform.DOScaleX(1,Mathf.Abs(transform.localScale.x));
+            transform.DOScaleX(1,Mathf.Abs(transform.localScale.x)*flipTime);
         }
         else if (_rb.linearVelocity.x > 0)
         {
-            transform.DOScaleX(-1,Mathf.Abs(transform.localScale.x));
+            transform.DOScaleX(-1,Mathf.Abs(transform.localScale.x)*flipTime);
         }
         
         //If y velocity is greater than 0, play jump animation
