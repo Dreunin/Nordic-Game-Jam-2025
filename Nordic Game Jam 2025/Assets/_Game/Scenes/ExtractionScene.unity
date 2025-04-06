@@ -366,6 +366,7 @@ MonoBehaviour:
   - {fileID: 2063585298}
   - {fileID: 1978061794}
   - {fileID: 1736555646}
+  _playerAnimator: {fileID: 289818213}
   crosshairSpeed: 10
 --- !u!1 &289818212
 GameObject:
@@ -1476,11 +1477,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4371794388077257833, guid: ce7c58d6418e25c46ae7b3f82af62927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.65
+      value: -2.59
       objectReference: {fileID: 0}
     - target: {fileID: 4371794388077257833, guid: ce7c58d6418e25c46ae7b3f82af62927, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813280603807577316, guid: ce7c58d6418e25c46ae7b3f82af62927, type: 3}
+      propertyPath: m_DrawMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7777644622616582613, guid: ce7c58d6418e25c46ae7b3f82af62927, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1492,7 +1497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8051059395411338405, guid: ce7c58d6418e25c46ae7b3f82af62927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.51
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 8051059395411338405, guid: ce7c58d6418e25c46ae7b3f82af62927, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1540,7 +1545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058384233160808260, guid: ce7c58d6418e25c46ae7b3f82af62927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.45
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 9058384233160808260, guid: ce7c58d6418e25c46ae7b3f82af62927, type: 3}
       propertyPath: m_LocalPosition.y
