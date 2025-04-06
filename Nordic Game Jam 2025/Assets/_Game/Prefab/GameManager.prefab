@@ -422,6 +422,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334983299692535423, guid: 856f2e2626be9684db7d65aeffc8311b, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334983299692535423, guid: 856f2e2626be9684db7d65aeffc8311b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 12c3c69f8a8da411fa3fbcbc33ffb0c9, type: 3}
+    - target: {fileID: 8334983299692535423, guid: 856f2e2626be9684db7d65aeffc8311b, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334983299692535423, guid: 856f2e2626be9684db7d65aeffc8311b, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334983299692535423, guid: 856f2e2626be9684db7d65aeffc8311b, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8617575174265312659, guid: 856f2e2626be9684db7d65aeffc8311b, type: 3}
       propertyPath: m_text
       value: Restart
