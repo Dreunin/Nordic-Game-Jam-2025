@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,7 +26,6 @@ public class PlayerController : MonoBehaviour
 
     private float _jumpTimestamp;
 
-    
     enum ClimbDirection { Left, Right }
     private Climbable _attachedClimbable;
     private ClimbDirection _climbDirection;
@@ -58,6 +58,12 @@ public class PlayerController : MonoBehaviour
         _move = _inputMap.FindAction("Move");
         _jump = _inputMap.FindAction("Jump");
         _jump.performed += HandleJump;
+        
+        //Dotween enlarge and visible player
+        transform.localScale = Vector3.zero;
+        GetComponent<SpriteRenderer>().DOFade(0, 0);
+        GetComponent<SpriteRenderer>().DOFade(1, 2f);
+        transform.DOScale(1, 2f);
     }
 
     private Vector2 currentInput;
