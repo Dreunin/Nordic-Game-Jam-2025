@@ -36,12 +36,13 @@ public class GameManager : MonoBehaviour
         //Set default checkpoint to player position
         currentCheckpoint = player.transform.position;
     }
+    
 
     void Update()
     {
         if (noiseMade >= 100)
         {
-            ReloadLevel();
+            LoseGame();
         }
         
         //On pressing R, reset to checkpoint
@@ -54,12 +55,14 @@ public class GameManager : MonoBehaviour
     private void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        noiseMade = 0;
+        noiseText.enabled = true;
     }
 
     public void UpdateNoise(float noise)
     {
         noiseMade += noise;
-        noiseText.text = "Sleeping: " + noiseMade.ToString("0") + "%";
+        noiseText.text = "Human woken up: " + noiseMade.ToString("0") + "%";
         
         //Press R to restart
         if (Input.GetKeyDown(KeyCode.R))
@@ -70,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetToCheckPoint()
     {
+        noiseMade = 0;
         ReloadLevel();
         player.ResetVelocity();
         player.transform.position = currentCheckpoint;
@@ -83,6 +87,8 @@ public class GameManager : MonoBehaviour
     public CinemachineCamera gameOverCam;
     public void LoseGame()
     {
+        noiseMade = 0;
+        noiseText.enabled = false;
         //Show animation
         wakeUp.SetActive(true);
         gameOverCam.gameObject.SetActive(true);
@@ -106,12 +112,14 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene("Main_Level");
+        noiseText.enabled = true;
         Time.timeScale = 1;
     }
 
     public void StartExtraction()
     {
         //Destroy player
+        noiseText.enabled = false;
         Destroy(player.gameObject);
         //Next scene
         SceneManager.LoadScene("ExtractionScene");

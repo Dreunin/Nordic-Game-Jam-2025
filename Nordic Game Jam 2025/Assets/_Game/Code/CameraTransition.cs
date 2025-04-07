@@ -14,11 +14,12 @@ public class CameraTransition : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
+        if(_cameraLeft == _cameraRight) _cameraLeft.SetActive(true);
         //If left of the object, enable left camera
         if (other.transform.position.x < transform.position.x)
         {
-            _cameraLeft.SetActive(true);
             _cameraRight.SetActive(false);
+            _cameraLeft.SetActive(true);
         }
         else
         {
