@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   on: 0
-  wakeUpValue: 0.01
+  wakeUpValue: 10
 --- !u!82 &7548629196092266877
 AudioSource:
   m_ObjectHideFlags: 0

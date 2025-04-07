@@ -9,5 +9,11 @@ public class Jumppad : MonoBehaviour
     public void Use()
     {
         used = true;
+        Invoke(nameof(ReadyAgain),2f);
+    }
+
+    private void ReadyAgain()
+    {
+        used = false;
     }
 }
