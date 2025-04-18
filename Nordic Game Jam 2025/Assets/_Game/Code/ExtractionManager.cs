@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class ExtractionManager : MonoBehaviour
 {
@@ -23,6 +25,9 @@ public class ExtractionManager : MonoBehaviour
     private InputActionMap _inputActionMap;
     private InputAction _move;
     private InputAction _extract;
+    
+    [SerializeField] Texture2D cursorPick;
+    [SerializeField] Texture2D cursorSwung;
 
     private bool won;
     
@@ -40,6 +45,8 @@ public class ExtractionManager : MonoBehaviour
         
         OnControlsChanged(_input);
         
+        //Set mouse cursor to be pickaxe
+        Cursor.SetCursor(cursorPick, Vector2.zero, CursorMode.Auto);
     }
 
     private void Update()
@@ -109,6 +116,23 @@ public class ExtractionManager : MonoBehaviour
             won = true;
             Invoke(nameof(Win),2f);
         }
+        
+        //Animation of pickaxe
+        if (_input.currentControlScheme == "Gamepad")
+        { 
+            //DoTween animation of pickaxe
+            crosshair.transform.DOPunchRotation(new Vector3(0, 0, 45), 0.1f, 1, 0);
+        } else if (_input.currentControlScheme == "Keyboard&Mouse")
+        {
+            //Set mouse cursor to be pickaxe swung
+            Cursor.SetCursor(cursorSwung, Vector2.zero, CursorMode.Auto);
+            Invoke(nameof(SetCursorToPickAxe), 0.1f);        
+        }
+    }
+    
+    private void SetCursorToPickAxe()
+    {
+        Cursor.SetCursor(cursorPick, Vector2.zero, CursorMode.Auto);
     }
 
     public GameObject canvas;
