@@ -497,6 +497,8 @@ MonoBehaviour:
   - {fileID: 1736555646}
   _playerAnimator: {fileID: 289818213}
   crosshairSpeed: 10
+  cursorPick: {fileID: 2800000, guid: 46830013132ae4d46ae453d3ee058927, type: 3}
+  cursorSwung: {fileID: 2800000, guid: 2fa3eede74ba6204fa12a8e66d7c6319, type: 3}
   canvas: {fileID: 2052641403}
 --- !u!1 &289818212
 GameObject:
