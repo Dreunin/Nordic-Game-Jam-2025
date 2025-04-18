@@ -23,6 +23,8 @@ public class ExtractionManager : MonoBehaviour
     private InputActionMap _inputActionMap;
     private InputAction _move;
     private InputAction _extract;
+
+    private bool won;
     
     public void Awake()
     {
@@ -37,6 +39,7 @@ public class ExtractionManager : MonoBehaviour
         _input.onControlsChanged += OnControlsChanged;
         
         OnControlsChanged(_input);
+        
     }
 
     private void Update()
@@ -101,7 +104,11 @@ public class ExtractionManager : MonoBehaviour
         }
 
         if (!toothFound) Lose();
-        if (_teeth.All(t => t.IsCollected())) Win();
+        if (_teeth.All(t => t.IsCollected()) && !won)
+        {
+            won = true;
+            Invoke(nameof(Win),2f);
+        }
     }
 
     public GameObject canvas;
