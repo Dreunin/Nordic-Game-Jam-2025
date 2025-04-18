@@ -7,4 +7,12 @@ public class Control : MonoBehaviour
     {
         SceneManager.LoadScene("Main_Level");
     }
+
+    public void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            NextScene();
+        }
+    }
 }

@@ -12,4 +12,12 @@ public class GameOverScreen : MonoBehaviour
         gameObject.SetActive(false);
         GameManager.instance.ResetToCheckPoint();
     }
+    
+    public void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            ResetToCheckPoint();
+        }
+    }
 }
