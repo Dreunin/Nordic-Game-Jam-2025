@@ -46,7 +46,7 @@ public class ExtractionManager : MonoBehaviour
         OnControlsChanged(_input);
         
         //Set mouse cursor to be pickaxe
-        Cursor.SetCursor(cursorPick, Vector2.zero, CursorMode.Auto);
+        SetCursorToPickAxe();
     }
 
     private void Update()
@@ -125,14 +125,16 @@ public class ExtractionManager : MonoBehaviour
         } else if (_input.currentControlScheme == "Keyboard&Mouse")
         {
             //Set mouse cursor to be pickaxe swung
-            Cursor.SetCursor(cursorSwung, Vector2.zero, CursorMode.Auto);
+            Vector2 center = new Vector2(cursorSwung.width / 2f, cursorSwung.height / 2f);
+            Cursor.SetCursor(cursorSwung, center, CursorMode.Auto);
             Invoke(nameof(SetCursorToPickAxe), 0.1f);        
         }
     }
     
     private void SetCursorToPickAxe()
     {
-        Cursor.SetCursor(cursorPick, Vector2.zero, CursorMode.Auto);
+        Vector2 center = new Vector2(cursorPick.width / 2f, cursorPick.height / 2f);
+        Cursor.SetCursor(cursorPick, center, CursorMode.Auto);
     }
 
     public GameObject canvas;
